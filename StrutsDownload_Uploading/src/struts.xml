@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 常量配置 -->
+	 <constant name="struts.devMode" value="true" />
+	 <constant name="struts.i18n.encoding" value="utf-8"/>
+ 	 <!-- 缺省包 -->
+ 	 
+ 	 <!-- 上传 -->
+ 	 <package name="default" namespace="/" extends="struts-default">
+ 	 	<action name="upload" class="org.fage.controller.UploadingAction">
+ 	 		 <!-- <interceptor-ref name="fileUpload"> 
+             	配置允许上传的文件类型，多个用","分隔  
+              <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png,image/pjpeg</param> 
+            	 配置允许上传的文件大小，单位字节  
+              <param name="maximumSize">102400</param> 
+           	</interceptor-ref> 
+           	<interceptor-ref name="defaultStack" />  -->
+           	<param name="uploadSaveDir">/upload</param>
+ 	 		<result name="success">/message.jsp</result>
+ 	 		<result name="input">/message.jsp</result>
+ 	 	</action>
+ 	 	
+ 	 	<!-- 下载 -->
+ 	 	<action name="download" class="org.fage.controller.DownloadAction">
+            <result name="success" type="stream">
+                <param name="contentDisposition">attachment;filename=${userFile.fileName}</param>
+                <param name="inputName">downloadFile</param>
+            </result>
+        </action>
+ 	 	
+ 	 </package>
+
+</struts>
